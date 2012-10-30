@@ -1,0 +1,10 @@
+require 'spec_helper'
+require Rails.root.join("db", "datafixes", "<%= "#{timestamp}_#{file_name}" %>")
+
+describe Datafixes::<%= file_name.camelize %> do
+  describe ".up" do
+  end
+
+  describe ".down" do
+  end
+end
