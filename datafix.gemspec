@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["casecommons-dev@googlegroups.com"]
   gem.description   = %q{Datafix provides a generator for documenting and testing database hotfixes}
   gem.summary       = %q{Datafix provides a generator for documenting and testing database hotfixes}
-  gem.homepage      = "https://github.com/Casecommons/datafix"
+  gem.homepage      = "https://github.com/Casecommons/data_fix"
 
   gem.add_development_dependency "rspec"
   gem.add_development_dependency "rake"
