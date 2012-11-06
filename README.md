@@ -6,15 +6,11 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'datafix'
+    gem 'datafix', :github => 'Casecommons/data_fix'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install datafix
 
 ## Usage
 
