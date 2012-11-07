@@ -1,6 +1,6 @@
 # Datafix
 
-TODO: Write a gem description
+Datafix provides a template generator for documenting and testing database hotfixes
 
 ## Installation
 
@@ -14,7 +14,33 @@ And then execute:
 
 ## Usage
 
-TODO: Write usage instructions here
+Generate a timestamped datafix script with some boilerplate for execution.
+
+    rails g datafix MyGroovyName
+
+This will create:
+
+    db/datafixes/YYYYMMDDhhmmss_my_groovy_name.rb
+
+and
+
+    spec/datafixes/YYYYMMDDhhmmss_my_groovy_name_spec.rb
+
+To run it, execute:
+
+    rake db:datafix[:up] NAME=my_groovy_name
+
+or
+
+    rake db:datafix[:up] NAME=MyGroovyName
+
+run the down with:
+
+    rake db:datafix:down NAME=my_groovy_name
+
+To run the spec, execute:
+
+    rspec spec/datafixes/YYYYMMDDhhmmss_my_groovy_name_spec.rb
 
 ## Contributing
 
@@ -23,3 +49,4 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
