@@ -8,8 +8,13 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Datafix provides a generator for documenting and testing database hotfixes}
   gem.homepage      = "https://github.com/Casecommons/data_fix"
 
+  gem.add_dependency "activerecord"
+  gem.add_dependency "pg"
+
   gem.add_development_dependency "rspec"
+  gem.add_development_dependency "database_cleaner"
   gem.add_development_dependency "rake"
+  gem.add_development_dependency "pry"
 
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
