@@ -42,11 +42,22 @@ end
 
 class Kitten < ActiveRecord::Base; end
 
+require "action_controller/railtie"
+class TestRailsApp < Rails::Application
+  config.secret_token = "random_secret_token"
+end
+
+Rails.application.config.root = File.expand_path("../tmp_rails_app",__FILE__)
+
+
 RSpec.configure do |config|
   config.color_enabled = true
   config.formatter     = 'documentation'
 
   config.before(:suite) do
+    FileUtils.rm_rf(Rails.root)
+    Dir.mkdir(Rails.root)
+    TestRailsApp.initialize!
     DatabaseCleaner.strategy = :transaction
   end
 
@@ -56,5 +67,9 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+
+  config.after(:suite) do
+    FileUtils.rm_rf(Rails.root)
   end
 end

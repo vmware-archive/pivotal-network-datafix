@@ -9,6 +9,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/Casecommons/data_fix"
 
   gem.add_dependency "activerecord"
+  gem.add_dependency "railties"
   gem.add_dependency "pg"
 
   gem.add_development_dependency "rspec"
