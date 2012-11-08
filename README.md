@@ -11,6 +11,8 @@ Add this line to your application's Gemfile:
 And then execute:
 
     $ bundle
+    $ rails g datafix:install
+    $ rake db:migrate
 
 ## Usage
 
@@ -24,7 +26,7 @@ This will create:
 
 and
 
-    spec/datafixes/YYYYMMDDhhmmss_my_groovy_name_spec.rb
+    spec/db/datafixes/YYYYMMDDhhmmss_my_groovy_name_spec.rb
 
 To run it, execute:
 
@@ -40,7 +42,7 @@ run the down with:
 
 To run the spec, execute:
 
-    rspec spec/datafixes/YYYYMMDDhhmmss_my_groovy_name_spec.rb
+    rspec spec/db/datafixes/YYYYMMDDhhmmss_my_groovy_name_spec.rb
 
 ## Contributing
 
