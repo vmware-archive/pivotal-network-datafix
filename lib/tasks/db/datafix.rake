@@ -19,23 +19,33 @@ namespace :db do
       klass_from_name(name).migrate('down')
     end
 
-    private
+    desc 'Display status of migrations'
+    task :status => [:environment] do
 
-    def klass_from_name(name)
-      name = name.split(File::SEPARATOR).last.gsub(/^\d+_/, '').gsub(/.rb$/, '').camelize
-      "Datafixes::#{name}".constantize
-    end
+      puts "\ndatabase: #{ActiveRecord::Base.connection_config[:database]}\n\n"
+      puts "#{'Status'.center(8)}  #{'Last Run'.ljust(22)} Datafix Name"
+      puts "-" * 80
 
-    def path_from_name(name)
-      unless name =~ %r(^db/datafixes/)
-        name = name.underscore
-        name = Dir.glob("db/datafixes/*_#{name}.rb").first
+      Datafix::Reporter.new.status.each do |datafix|
+        last_run = datafix.last_run ? datafix.last_run.iso8601 : '(not run)'
+        puts "#{datafix.status.center(8)}  #{last_run.ljust(22)} #{datafix.name}"
       end
-      Rails.root.join(name)
+      puts
     end
-
   end
 
-  desc "Run the 'up' on the passed datafix"
-  task :datafix => 'datafix:up'
+  private
+
+  def klass_from_name(name)
+    name = name.split(File::SEPARATOR).last.gsub(/^\d+_/, '').gsub(/.rb$/, '').camelize
+    "Datafixes::#{name}".constantize
+  end
+
+  def path_from_name(name)
+    unless name =~ %r(^db/datafixes/)
+      name = name.underscore
+      name = Dir.glob("db/datafixes/*_#{name}.rb").first
+    end
+    Rails.root.join(name)
+  end
 end

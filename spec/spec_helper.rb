@@ -1,5 +1,7 @@
 require 'rubygems'
 require 'bundler/setup'
+require 'fileutils'
+require 'tempfile'
 
 require 'active_record'
 require 'database_cleaner'
@@ -45,14 +47,17 @@ class Kitten < ActiveRecord::Base; end
 require "action_controller/railtie"
 class TestRailsApp < Rails::Application
   config.secret_token = "random_secret_token"
+  config.eager_load = false
 end
 
 Rails.application.config.root = File.expand_path("../tmp_rails_app",__FILE__)
 
-
 RSpec.configure do |config|
-  config.color_enabled = true
-  config.formatter     = 'documentation'
+  config.color     = true
+  config.formatter = 'documentation'
+  config.expect_with :rspec do |c|
+    c.syntax = [:expect, :should]
+  end
 
   config.before(:suite) do
     FileUtils.rm_rf(Rails.root)
